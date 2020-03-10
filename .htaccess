@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /hello-atx
+RewriteCond %{HTTP_HOST} ^www.yourdomain.com [NC]
+RewriteRule ^(.*)$ http://yourdomain.com/$1 [L,R=301]
+
+#Error pages
+ErrorDocument 400 /hello-atx/error-pages/400.html
+ErrorDocument 401 /hello-atx/error-pages/401.html
+ErrorDocument 403 /hello-atx/error-pages/403.html
+ErrorDocument 404 /hello-atx/error-pages/404.html
+ErrorDocument 500 /hello-atx/error-pages/500.html
+ErrorDocument 502 /hello-atx/error-pages/502.html
+ErrorDocument 504 /hello-atx/error-pages/504.html
