@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>test</title>
+<style type="text/css">
+.contain{
+	width: 400px;
+	max-width: 100%;
+	height: 150px;
+	position: relative;
+	background: #ccc;
+}
+#trapezoid {
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-right: 10px solid #575757;
+	height: 30px;
+	position: relative;
+	top: 30px;
+	float: right;
+}
+.attach {
+    position: relative;
+    margin-left: auto;
+}
+.unselect {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.slidingDiv {
+	width: 90px;
+    height:95px;
+    background-color: #99CCFF;
+    padding:20px;
+    margin-top:10px;
+    border-bottom:5px solid #3399FF;
+    position: relative;
+    right: 0;
+}
+.show_hide {
+    display:none;
+}
+.zoom{
+	background: #ccc;
+	padding: 10px;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+	transition: transform .2s;
+}
+.zoom.out{
+	opacity: 0.3;
+	transform: scale(0);
+	-ms-transform: scale(0); /* IE 9 */
+  -webkit-transform: scale(0); /* Safari 3-8 */
+}
+.zoom.in{
+	opacity: 1;
+	transform: scale(1);
+	-ms-transform: scale(1); /* IE 9 */
+  -webkit-transform: scale(1); /* Safari 3-8 */
+}
+.sidepanel{
+  position: relative;
+  z-index: 1;
+  height:90px;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.2s;
+  padding-top: 60px;
+  float: right;
+}
+.sidepanel.hide{width:0px;}
+.sidepanel.show{width:230px;}
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+</style>
+</head>
+<body>
+<br><br>
+<button class="zoomon">zoom</button>
+<div class="zoom out"><a href="home.html">home</a></div>
+<br><br>
+<p class="dt"></p>
+<div class="contain">
+ <div id="sidepanel" class="sidepanel hide unselect">
+  <div>
+   <a href="#">About</a>
+   <a href="#">Services</a>
+   <a href="#">Clients</a>
+   <a href="#">Contact</a>
+  </div>
+ </div>
+ <div id="trapezoid" class="atx-stick"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+$(".zoomon").click(function(){
+$(".zoom").toggleClass("out in");
+});
+$("#trapezoid").click(function(){
+$(".sidepanel").toggleClass("hide show");
+});
+});
+var hmc = document.getElementById('trapezoid');
+var sp = document.getElementById('sidepanel');
+var mc = new Hammer(hmc);
+var sdp = new Hammer(sp);
+mc.on("panleft", function(ev){
+$(".sidepanel").addClass("show").removeClass("hide");
+});
+mc.on("panright", function(ev){
+$(".sidepanel").removeClass("show").addClass("hide");
+});
+sdp.on("panright", function(ev){
+$(".sidepanel").removeClass("show").addClass("hide");
+});
+
+// $("#trapezoid").on("swipeleft",function(){
+// $(".sidepanel").addClass("show").removeClass("hide");
+// });
+// $("#trapezoid").on("swiperight",function(){
+// $(".sidepanel").removeClass("show").addClass("hide");
+// });
+// $(".sidepanel").on("swiperight",function(){
+// $(".sidepanel").removeClass("show").addClass("hide");
+// });
+
+var d = new Date();
+var dt=d.getDate();mt=d.getMonth()+1;yr=d.getFullYear(); 
+$(".dt").text(dt+"-"+mt+"-"+yr);
+
+</script>
+</body>
+</html>
